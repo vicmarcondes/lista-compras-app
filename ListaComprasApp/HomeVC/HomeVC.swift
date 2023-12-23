@@ -8,11 +8,18 @@
 import UIKit
 
 class HomeVC: UIViewController {
+    
+    private var homeScreen: HomeScreen?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .blue
+        view.backgroundColor = .appBlue
         // Do any additional setup after loading the view.
+    }
+    
+    override func loadView() {
+        homeScreen = HomeScreen()
+        view = homeScreen
     }
 
 
