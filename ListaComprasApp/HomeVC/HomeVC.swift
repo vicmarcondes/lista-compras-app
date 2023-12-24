@@ -19,9 +19,20 @@ class HomeVC: UIViewController {
     
     override func loadView() {
         homeScreen = HomeScreen()
+        homeScreen?.delegate(delegate: self)
         view = homeScreen
     }
 
 
+}
+
+extension HomeVC: HomeScreenDelegate {
+    func tappedGoToNewList() {
+        print(#function)
+        let newListVC = NewListVC()
+        present(newListVC, animated: true)
+    }
+    
+    
 }
 

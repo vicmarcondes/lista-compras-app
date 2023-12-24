@@ -16,6 +16,7 @@
 		849A81162B3612C900D4F3B6 /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849A81152B3612C900D4F3B6 /* HomeScreen.swift */; };
 		849A81182B372A8600D4F3B6 /* UIView + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849A81172B372A8600D4F3B6 /* UIView + Extension.swift */; };
 		849A811A2B372D8700D4F3B6 /* UIButton + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849A81192B372D8700D4F3B6 /* UIButton + Extension.swift */; };
+		849A811F2B3871FA00D4F3B6 /* NewListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849A811E2B3871FA00D4F3B6 /* NewListVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		849A81152B3612C900D4F3B6 /* HomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreen.swift; sourceTree = "<group>"; };
 		849A81172B372A8600D4F3B6 /* UIView + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView + Extension.swift"; sourceTree = "<group>"; };
 		849A81192B372D8700D4F3B6 /* UIButton + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton + Extension.swift"; sourceTree = "<group>"; };
+		849A811E2B3871FA00D4F3B6 /* NewListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewListVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +64,7 @@
 		849A80F92B339BAB00D4F3B6 /* ListaComprasApp */ = {
 			isa = PBXGroup;
 			children = (
+				849A811B2B3871B200D4F3B6 /* NewListVC */,
 				849A81122B34ECF100D4F3B6 /* Extensions */,
 				849A810E2B34EAFB00D4F3B6 /* HomeVC */,
 				849A80FA2B339BAB00D4F3B6 /* AppDelegate.swift */,
@@ -90,6 +93,14 @@
 				849A81192B372D8700D4F3B6 /* UIButton + Extension.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		849A811B2B3871B200D4F3B6 /* NewListVC */ = {
+			isa = PBXGroup;
+			children = (
+				849A811E2B3871FA00D4F3B6 /* NewListVC.swift */,
+			);
+			path = NewListVC;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -163,6 +174,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				849A80FF2B339BAB00D4F3B6 /* HomeVC.swift in Sources */,
+				849A811F2B3871FA00D4F3B6 /* NewListVC.swift in Sources */,
 				849A81162B3612C900D4F3B6 /* HomeScreen.swift in Sources */,
 				849A81182B372A8600D4F3B6 /* UIView + Extension.swift in Sources */,
 				849A80FB2B339BAB00D4F3B6 /* AppDelegate.swift in Sources */,

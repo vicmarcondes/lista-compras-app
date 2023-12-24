@@ -7,8 +7,18 @@
 
 import UIKit
 
+protocol HomeScreenDelegate {
+    func tappedGoToNewList()
+}
+
 class HomeScreen: UIView {
     
+    var delegate: HomeScreenDelegate?
+    
+    func delegate(delegate: HomeScreenDelegate) {
+        self.delegate = delegate
+    }
+     
     lazy var logoImage: UIImageView = {
         let image = UIImageView()
         image.standard()
@@ -33,6 +43,7 @@ class HomeScreen: UIView {
         button.layer.borderColor = UIColor.appBlue.cgColor
         button.layer.borderWidth = 1
         button.layer.cornerRadius = 5
+        button.addTarget(self, action: #selector(tappedGoToNewList), for: .touchUpInside)
         return button
     }()
     
@@ -46,6 +57,10 @@ class HomeScreen: UIView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    @objc func tappedGoToNewList() {
+        delegate?.tappedGoToNewList()
     }
     
     func setupConstrainnts() {
