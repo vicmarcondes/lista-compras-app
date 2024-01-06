@@ -14,5 +14,9 @@ extension UIView {
         self.translatesAutoresizingMaskIntoConstraints = false
     }
     
+    func borderRounded() {
+        self.layer.borderWidth = 1
+        self.layer.cornerRadius = 5
+    }
 
 }

@@ -41,8 +41,7 @@ class HomeScreen: UIView {
         let button = UIButton()
         button.setButton(title: "Nova lista", backgroundColor: .white, fontColor: .appBlue, fontSize: 16)
         button.layer.borderColor = UIColor.appBlue.cgColor
-        button.layer.borderWidth = 1
-        button.layer.cornerRadius = 5
+        button.borderRounded()
         button.addTarget(self, action: #selector(tappedGoToNewList), for: .touchUpInside)
         return button
     }()
