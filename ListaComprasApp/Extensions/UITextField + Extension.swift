@@ -23,9 +23,17 @@ extension UITextField {
             attributes: [NSAttributedString.Key.foregroundColor: textColor]
         )
     }
+
+    func paddingRight(_ paddingValue: Int) {
+        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: paddingValue, height: 0))
+        self.rightView = paddingView
+        self.rightViewMode = .always
+    }
     
-    func setPadding(top: CGFloat, left: CGFloat, bottom: CGFloat, right: CGFloat) {
-//        self.textContainerInset = UIEdgeInsets(top: top, left: left, bottom: bottom, right: right)
+    func paddingLeft(_ paddingValue: Int) {
+        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: paddingValue, height: 0))
+        self.leftView = paddingView
+        self.leftViewMode = .always
     }
     
 }

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8415667D2B65603F002EA446 /* ProductsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8415667C2B65603F002EA446 /* ProductsTableViewCell.swift */; };
+		841566802B66C05D002EA446 /* NewListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8415667F2B66C05D002EA446 /* NewListViewModel.swift */; };
 		8451BE052B4777BF00089F8E /* NewListScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8451BE042B4777BF00089F8E /* NewListScreen.swift */; };
 		849A80FB2B339BAB00D4F3B6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849A80FA2B339BAB00D4F3B6 /* AppDelegate.swift */; };
 		849A80FD2B339BAB00D4F3B6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849A80FC2B339BAB00D4F3B6 /* SceneDelegate.swift */; };
@@ -18,10 +20,13 @@
 		849A81182B372A8600D4F3B6 /* UIView + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849A81172B372A8600D4F3B6 /* UIView + Extension.swift */; };
 		849A811A2B372D8700D4F3B6 /* UIButton + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849A81192B372D8700D4F3B6 /* UIButton + Extension.swift */; };
 		849A811F2B3871FA00D4F3B6 /* NewListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849A811E2B3871FA00D4F3B6 /* NewListVC.swift */; };
+		84B3AABF2B5607B900C3676D /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B3AABE2B5607B900C3676D /* Product.swift */; };
 		84B6C2AA2B48953C000FC6BC /* UITextField + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B6C2A92B48953C000FC6BC /* UITextField + Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8415667C2B65603F002EA446 /* ProductsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsTableViewCell.swift; sourceTree = "<group>"; };
+		8415667F2B66C05D002EA446 /* NewListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewListViewModel.swift; sourceTree = "<group>"; };
 		8451BE042B4777BF00089F8E /* NewListScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewListScreen.swift; sourceTree = "<group>"; };
 		849A80F72B339BAB00D4F3B6 /* ListaComprasApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ListaComprasApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		849A80FA2B339BAB00D4F3B6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -35,6 +40,7 @@
 		849A81172B372A8600D4F3B6 /* UIView + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView + Extension.swift"; sourceTree = "<group>"; };
 		849A81192B372D8700D4F3B6 /* UIButton + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton + Extension.swift"; sourceTree = "<group>"; };
 		849A811E2B3871FA00D4F3B6 /* NewListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewListVC.swift; sourceTree = "<group>"; };
+		84B3AABE2B5607B900C3676D /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		84B6C2A92B48953C000FC6BC /* UITextField + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField + Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -49,6 +55,38 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		841566792B655FBB002EA446 /* Screen */ = {
+			isa = PBXGroup;
+			children = (
+				8451BE042B4777BF00089F8E /* NewListScreen.swift */,
+			);
+			path = Screen;
+			sourceTree = "<group>";
+		};
+		8415667A2B655FC9002EA446 /* Screen */ = {
+			isa = PBXGroup;
+			children = (
+				849A81152B3612C900D4F3B6 /* HomeScreen.swift */,
+			);
+			path = Screen;
+			sourceTree = "<group>";
+		};
+		8415667B2B65601D002EA446 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				8415667C2B65603F002EA446 /* ProductsTableViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		8415667E2B66C043002EA446 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				8415667F2B66C05D002EA446 /* NewListViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		849A80EE2B339BAB00D4F3B6 = {
 			isa = PBXGroup;
 			children = (
@@ -68,8 +106,9 @@
 		849A80F92B339BAB00D4F3B6 /* ListaComprasApp */ = {
 			isa = PBXGroup;
 			children = (
-				849A811B2B3871B200D4F3B6 /* NewListVC */,
 				849A81122B34ECF100D4F3B6 /* Extensions */,
+				84B3AABD2B5606ED00C3676D /* Model */,
+				849A811B2B3871B200D4F3B6 /* NewListVC */,
 				849A810E2B34EAFB00D4F3B6 /* HomeVC */,
 				849A80FA2B339BAB00D4F3B6 /* AppDelegate.swift */,
 				849A80FC2B339BAB00D4F3B6 /* SceneDelegate.swift */,
@@ -83,8 +122,8 @@
 		849A810E2B34EAFB00D4F3B6 /* HomeVC */ = {
 			isa = PBXGroup;
 			children = (
+				8415667A2B655FC9002EA446 /* Screen */,
 				849A80FE2B339BAB00D4F3B6 /* HomeVC.swift */,
-				849A81152B3612C900D4F3B6 /* HomeScreen.swift */,
 			);
 			path = HomeVC;
 			sourceTree = "<group>";
@@ -103,10 +142,20 @@
 		849A811B2B3871B200D4F3B6 /* NewListVC */ = {
 			isa = PBXGroup;
 			children = (
+				8415667E2B66C043002EA446 /* ViewModel */,
+				8415667B2B65601D002EA446 /* Cell */,
+				841566792B655FBB002EA446 /* Screen */,
 				849A811E2B3871FA00D4F3B6 /* NewListVC.swift */,
-				8451BE042B4777BF00089F8E /* NewListScreen.swift */,
 			);
 			path = NewListVC;
+			sourceTree = "<group>";
+		};
+		84B3AABD2B5606ED00C3676D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				84B3AABE2B5607B900C3676D /* Product.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -184,9 +233,12 @@
 				849A80FF2B339BAB00D4F3B6 /* HomeVC.swift in Sources */,
 				849A811F2B3871FA00D4F3B6 /* NewListVC.swift in Sources */,
 				849A81162B3612C900D4F3B6 /* HomeScreen.swift in Sources */,
+				84B3AABF2B5607B900C3676D /* Product.swift in Sources */,
+				841566802B66C05D002EA446 /* NewListViewModel.swift in Sources */,
 				849A81182B372A8600D4F3B6 /* UIView + Extension.swift in Sources */,
 				849A80FB2B339BAB00D4F3B6 /* AppDelegate.swift in Sources */,
 				849A811A2B372D8700D4F3B6 /* UIButton + Extension.swift in Sources */,
+				8415667D2B65603F002EA446 /* ProductsTableViewCell.swift in Sources */,
 				849A80FD2B339BAB00D4F3B6 /* SceneDelegate.swift in Sources */,
 				849A81142B34ED0F00D4F3B6 /* UIColor + Extension.swift in Sources */,
 			);

@@ -32,8 +32,7 @@ class HomeScreen: UIView {
         let button = UIButton()
         button.setButton(title: "Listas", backgroundColor: .white, fontColor: .appBlue, fontSize: 16)
         button.layer.borderColor = UIColor.appBlue.cgColor
-        button.layer.borderWidth = 1
-        button.layer.cornerRadius = 5
+        button.borderRounded(5)
         return button
     }()
     
@@ -41,7 +40,7 @@ class HomeScreen: UIView {
         let button = UIButton()
         button.setButton(title: "Nova lista", backgroundColor: .white, fontColor: .appBlue, fontSize: 16)
         button.layer.borderColor = UIColor.appBlue.cgColor
-        button.borderRounded()
+        button.borderRounded(5)
         button.addTarget(self, action: #selector(tappedGoToNewList), for: .touchUpInside)
         return button
     }()
