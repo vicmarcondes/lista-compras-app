@@ -10,6 +10,7 @@ import UIKit
 class NewListVC: UIViewController {
     private var newListScreen: NewListScreen?
     private var viewModel: NewListViewModel = NewListViewModel()
+    private var alert: Alert?
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var newList: List?
@@ -17,6 +18,8 @@ class NewListVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .appBlue
+        
+        alert = Alert(controller: self)
         // Do any additional setup after loading the view.
     }
     
@@ -58,8 +61,9 @@ extension NewListVC: NewListScreenProtocol {
             return
         }
         
-        
-        
+        alert?.showAlertWithAction(title: "Lista criada", message: "Sua lista foi criada com sucesso!", action: { alert in
+            self.dismiss(animated: true)
+        })
     }
     
     func tappedAddProduct(name: String, quantity: String) {

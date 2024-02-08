@@ -32,8 +32,8 @@ extension HomeVC: HomeScreenDelegate {
     func tappedGoToLists() {
         do {
             let lists = try context.fetch(List.fetchRequest())
-            print("Lists: \(lists.first?.name)")
-            print("Products: \(lists.first?.products?.allObjects.count)")
+            print("Lists: \(lists[2].name)")
+            print("Products: \(lists[2].products?.allObjects.count)")
 
 
         } catch {
