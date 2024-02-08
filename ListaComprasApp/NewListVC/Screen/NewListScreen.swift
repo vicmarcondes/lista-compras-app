@@ -8,17 +8,20 @@
 import UIKit
 
 protocol NewListScreenProtocol: AnyObject {
-    func tappedAddProduct(product: Product)
+    func tappedAddProduct(name: String, quantity: String)
+    func tappedCreateList()
 }
 
 class NewListScreen: UIView {
     
     weak var delegate: NewListScreenProtocol?
     
+    private var alertControler: Alert?
+    
     func delegate(delegate: NewListScreenProtocol) {
         self.delegate = delegate
     }
-
+    
     lazy var nameTextInput: UITextField = {
         let input = UITextField()
         input.create(text: "Nova lista", backgroundColor: .appBlue, textColor: .white)
@@ -74,6 +77,18 @@ class NewListScreen: UIView {
         return tv
     }()
 
+    lazy var createListButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Criar Lista", for: .normal)
+        button.setTitleColor(.appBlue, for: .normal)
+        button.borderRounded(5)
+        button.layer.borderColor = UIColor.appBlue.cgColor
+        button.layer.borderWidth = 1
+        button.backgroundColor = .white
+        button.addTarget(self, action: #selector(tappedCreateList), for: .touchUpInside)
+        return button
+    }()
     
 //    lazy var editIconImageView: UIImageView = {
 //        let image = UIImageView()
@@ -102,6 +117,7 @@ class NewListScreen: UIView {
         inputsView.addSubview(productTextInput)
         inputsView.addSubview(addProductButton)
         addSubview(productsTableView)
+        addSubview(createListButton)
     }
     
     public func configTableViewDelegateAndDatasource(delegate: UITableViewDelegate, datasource: UITableViewDataSource) {
@@ -109,13 +125,26 @@ class NewListScreen: UIView {
         productsTableView.dataSource = datasource
     }
     
+    public func configAlertController(controller: UIViewController) {
+        alertControler = Alert(controller: controller)
+    }
+    
     @objc func tappedAddProduct() {
         guard let name = productTextInput.text else { return }
         guard let quantity = quantityTextInput.text else { return }
         
-        delegate?.tappedAddProduct(product: Product(name: name, quantity: Int(quantity)!))
+        if quantity.isEmpty || name.isEmpty {
+            alertControler?.showAlert(title: "Campos inválidos", message: "Preencha os campos de nome e quantidade.")
+            return
+        }
+        
+        delegate?.tappedAddProduct(name: name, quantity: quantity)
         
         productsTableView.reloadData()
+    }
+    
+    @objc func tappedCreateList() {
+        delegate?.tappedCreateList()
     }
     
     private func setupConstraints() {
@@ -150,8 +179,12 @@ class NewListScreen: UIView {
             productsTableView.topAnchor.constraint(equalTo: inputsView.bottomAnchor, constant: 24),
             productsTableView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
             productsTableView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
-            productsTableView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -48)
+            productsTableView.bottomAnchor.constraint(equalTo: createListButton.topAnchor, constant: -16),
             
+            createListButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 24),
+            createListButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -24),
+            createListButton.heightAnchor.constraint(equalToConstant: 45),
+            createListButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -16)
         ])
     }
 

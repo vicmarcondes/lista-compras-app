@@ -9,6 +9,7 @@ import UIKit
 
 protocol HomeScreenDelegate {
     func tappedGoToNewList()
+    func tappedGoToLists()
 }
 
 class HomeScreen: UIView {
@@ -33,6 +34,7 @@ class HomeScreen: UIView {
         button.setButton(title: "Listas", backgroundColor: .white, fontColor: .appBlue, fontSize: 16)
         button.layer.borderColor = UIColor.appBlue.cgColor
         button.borderRounded(5)
+        button.addTarget(self, action: #selector(tappedGoToLists), for: .touchUpInside)
         return button
     }()
     
@@ -59,6 +61,10 @@ class HomeScreen: UIView {
     
     @objc func tappedGoToNewList() {
         delegate?.tappedGoToNewList()
+    }
+    
+    @objc func tappedGoToLists() {
+        delegate?.tappedGoToLists()
     }
     
     func setupConstrainnts() {

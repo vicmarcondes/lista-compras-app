@@ -65,8 +65,8 @@ class ProductsTableViewCell: UITableViewCell {
         addSubview(quantityLabel)
         addSubview(plusButton)
         addSubview(minusButton)
-        bringSubviewToFront(plusButton)
-        bringSubviewToFront(minusButton)
+//        bringSubviewToFront(plusButton)
+//        bringSubviewToFront(minusButton)
         // Initialization code
         configConstraints()
     }
@@ -98,7 +98,7 @@ class ProductsTableViewCell: UITableViewCell {
         NSLayoutConstraint.activate([
             productLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
             productLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            productLabel.trailingAnchor.constraint(equalTo: minusButton.leadingAnchor, constant: -16),
+            productLabel.trailingAnchor.constraint(equalTo: minusButton.leadingAnchor, constant: -24),
             
             quantityLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
             quantityLabel.trailingAnchor.constraint(equalTo: plusButton.leadingAnchor, constant: -8),

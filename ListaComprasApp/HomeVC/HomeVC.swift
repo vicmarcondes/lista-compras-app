@@ -11,6 +11,8 @@ class HomeVC: UIViewController {
     
     private var homeScreen: HomeScreen?
 
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .appBlue
@@ -27,6 +29,18 @@ class HomeVC: UIViewController {
 }
 
 extension HomeVC: HomeScreenDelegate {
+    func tappedGoToLists() {
+        do {
+            let lists = try context.fetch(List.fetchRequest())
+            print("Lists: \(lists.first?.name)")
+            print("Products: \(lists.first?.products?.allObjects.count)")
+
+
+        } catch {
+            print("Error: \(error)")
+        }
+    }
+    
     func tappedGoToNewList() {
         print(#function)
         let newListVC = NewListVC()

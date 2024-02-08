@@ -10,7 +10,10 @@ import UIKit
 class NewListVC: UIViewController {
     private var newListScreen: NewListScreen?
     private var viewModel: NewListViewModel = NewListViewModel()
-        
+    
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    var newList: List?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .appBlue
@@ -22,9 +25,10 @@ class NewListVC: UIViewController {
         view = newListScreen
         newListScreen?.configTableViewDelegateAndDatasource(delegate: self, datasource: self)
         newListScreen?.delegate(delegate: self)
+        newListScreen?.configAlertController(controller: self)
+        
+        newList = List(context: context)
     }
-    
-    
     
     
 }
@@ -44,7 +48,26 @@ extension NewListVC: UITableViewDataSource, UITableViewDelegate {
 }
 
 extension NewListVC: NewListScreenProtocol {
-    func tappedAddProduct(product: Product) {
+    func tappedCreateList() {
+        newList?.name = newListScreen?.nameTextInput.text ?? "Nova lista"
+        
+        do {
+            try context.save()
+        } catch {
+            print("Error: \(error)")
+            return
+        }
+        
+        
+        
+    }
+    
+    func tappedAddProduct(name: String, quantity: String) {
+        let product = Product(context: context)
+        product.name = name
+        product.quantity = Int16(quantity)!
+        
+        newList?.addToProducts(product)
         viewModel.addProduct(product: product)
     }
 }
@@ -58,5 +81,6 @@ extension NewListVC: ProductsTableViewCellProtocol {
     func tappedMinusQuantityButton(indexPath: IndexPath) {
         viewModel.subtractProductQuantity(indexPath: indexPath)
         newListScreen?.productsTableView.reloadData()
+//        let product = viewModel.loadCurrentProducts(indexPath: indexPath)
     }
 }

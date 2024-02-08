@@ -10,11 +10,7 @@ import UIKit
 
 class NewListViewModel {
     
-    private var products: [Product] = [
-        Product(name: "Banana", quantity: 2),
-        Product(name: "Maçã", quantity: 4),
-        Product(name: "Arroz (kg)", quantity: 1),
-    ]
+    private var products: [Product] = []
     
     func getProducts() -> [Product] {
         return products
