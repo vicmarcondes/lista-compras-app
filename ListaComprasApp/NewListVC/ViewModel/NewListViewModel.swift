@@ -31,4 +31,8 @@ class NewListViewModel {
     public func subtractProductQuantity(indexPath: IndexPath) {
         products[indexPath.row].quantity -= 1
     }
+    
+    public func setProducts(products: [Product]) {
+        self.products = products
+    }
 }

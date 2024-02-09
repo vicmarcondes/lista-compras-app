@@ -10,9 +10,7 @@ import UIKit
 class HomeVC: UIViewController {
     
     private var homeScreen: HomeScreen?
-
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .appBlue
@@ -30,15 +28,17 @@ class HomeVC: UIViewController {
 
 extension HomeVC: HomeScreenDelegate {
     func tappedGoToLists() {
-        do {
-            let lists = try context.fetch(List.fetchRequest())
-            print("Lists: \(lists[2].name)")
-            print("Products: \(lists[2].products?.allObjects.count)")
-
-
-        } catch {
-            print("Error: \(error)")
-        }
+//        do {
+//            let lists = try context.fetch(List.fetchRequest())
+//            print("Lists: \(lists[2].name)")
+//            print("Products: \(lists[2].products?.allObjects.count)")
+//
+//
+//        } catch {
+//            print("Error: \(error)")
+//        }
+            let vc = ListsVC()
+            navigationController?.pushViewController(vc, animated: true)
     }
     
     func tappedGoToNewList() {

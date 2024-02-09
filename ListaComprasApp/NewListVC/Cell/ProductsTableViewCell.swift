@@ -47,6 +47,7 @@ class ProductsTableViewCell: UITableViewCell {
         button.setBackgroundImage(UIImage(systemName: "plus.circle")?.withRenderingMode(.alwaysTemplate), for: .normal)
         button.tintColor = .black
         button.addTarget(self, action: #selector(tappedPlusQuantityButton), for: .touchUpInside)
+        button.isHidden = true
         return button
     }()
     
@@ -56,6 +57,7 @@ class ProductsTableViewCell: UITableViewCell {
         button.setBackgroundImage(UIImage(systemName: "minus.circle")?.withRenderingMode(.alwaysTemplate), for: .normal)
         button.tintColor = .black
         button.addTarget(self, action: #selector(tappedMinusQuantityButton), for: .touchUpInside)
+        button.isHidden = true
         return button
     }()
     
@@ -65,8 +67,8 @@ class ProductsTableViewCell: UITableViewCell {
         addSubview(quantityLabel)
         addSubview(plusButton)
         addSubview(minusButton)
-//        bringSubviewToFront(plusButton)
-//        bringSubviewToFront(minusButton)
+        bringSubviewToFront(plusButton)
+        bringSubviewToFront(minusButton)
         // Initialization code
         configConstraints()
     }

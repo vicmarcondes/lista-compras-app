@@ -8,7 +8,7 @@
 import UIKit
 
 class NewListVC: UIViewController {
-    private var newListScreen: NewListScreen?
+    private var newListScreen: NewListScreen = NewListScreen()
     private var viewModel: NewListViewModel = NewListViewModel()
     private var alert: Alert?
     
@@ -24,13 +24,22 @@ class NewListVC: UIViewController {
     }
     
     override func loadView() {
-        newListScreen = NewListScreen()
+        
         view = newListScreen
-        newListScreen?.configTableViewDelegateAndDatasource(delegate: self, datasource: self)
-        newListScreen?.delegate(delegate: self)
-        newListScreen?.configAlertController(controller: self)
+        newListScreen.configTableViewDelegateAndDatasource(delegate: self, datasource: self)
+        newListScreen.delegate(delegate: self)
+        newListScreen.configAlertController(controller: self)
         
         newList = List(context: context)
+    }
+    
+    public func setupData(list: List) {
+        newListScreen.nameTextInput.text = list.name
+        
+        if let products = list.products as? Set<Product> {
+            viewModel.setProducts(products: Array(products))
+            newListScreen.productsTableView.reloadData()
+        }
     }
     
     
@@ -52,7 +61,7 @@ extension NewListVC: UITableViewDataSource, UITableViewDelegate {
 
 extension NewListVC: NewListScreenProtocol {
     func tappedCreateList() {
-        newList?.name = newListScreen?.nameTextInput.text ?? "Nova lista"
+        newList?.name = newListScreen.nameTextInput.text ?? "Nova lista"
         
         do {
             try context.save()
@@ -79,12 +88,12 @@ extension NewListVC: NewListScreenProtocol {
 extension NewListVC: ProductsTableViewCellProtocol {
     func tappedPlusQuantityButton(indexPath: IndexPath) {
         viewModel.plusProductQuantity(indexPath: indexPath)
-        newListScreen?.productsTableView.reloadData()
+        newListScreen.productsTableView.reloadData()
     }
     
     func tappedMinusQuantityButton(indexPath: IndexPath) {
         viewModel.subtractProductQuantity(indexPath: indexPath)
-        newListScreen?.productsTableView.reloadData()
+        newListScreen.productsTableView.reloadData()
 //        let product = viewModel.loadCurrentProducts(indexPath: indexPath)
     }
 }
