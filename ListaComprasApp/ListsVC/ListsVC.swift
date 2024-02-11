@@ -61,7 +61,7 @@ extension ListsVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = NewListVC()
-        vc.setupData(list: lists[indexPath.row])
+        vc.setupDataFromListsVC(list: lists[indexPath.row])
         navigationController?.pushViewController(vc, animated: true)
 //        present(vc, animated: true)
     }

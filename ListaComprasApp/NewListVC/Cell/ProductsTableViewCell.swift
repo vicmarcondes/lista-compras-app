@@ -63,14 +63,9 @@ class ProductsTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        addSubview(productLabel)
-        addSubview(quantityLabel)
-        addSubview(plusButton)
-        addSubview(minusButton)
-        bringSubviewToFront(plusButton)
-        bringSubviewToFront(minusButton)
-        // Initialization code
+        configSubview()
         configConstraints()
+        editCellStyle()
     }
     
     required init?(coder: NSCoder) {
@@ -117,7 +112,18 @@ class ProductsTableViewCell: UITableViewCell {
         ])
     }
 
+    private func editCellStyle() {
+        self.backgroundColor = .white
+        self.isUserInteractionEnabled = false
+    }
 
-    
+    private func configSubview() {
+        addSubview(productLabel)
+        addSubview(quantityLabel)
+        addSubview(plusButton)
+        addSubview(minusButton)
+        bringSubviewToFront(plusButton)
+        bringSubviewToFront(minusButton)
+    }
 
 }

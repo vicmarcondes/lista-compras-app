@@ -24,16 +24,15 @@ class NewListVC: UIViewController {
     }
     
     override func loadView() {
-        
         view = newListScreen
         newListScreen.configTableViewDelegateAndDatasource(delegate: self, datasource: self)
         newListScreen.delegate(delegate: self)
         newListScreen.configAlertController(controller: self)
-        
-        newList = List(context: context)
     }
     
-    public func setupData(list: List) {
+    public func setupDataFromListsVC(list: List) {
+        viewModel.setList(list: list)
+        
         newListScreen.nameTextInput.text = list.name
         
         if let products = list.products as? Set<Product> {
@@ -41,8 +40,7 @@ class NewListVC: UIViewController {
             newListScreen.productsTableView.reloadData()
         }
     }
-    
-    
+
 }
 
 extension NewListVC: UITableViewDataSource, UITableViewDelegate {
@@ -60,8 +58,32 @@ extension NewListVC: UITableViewDataSource, UITableViewDelegate {
 }
 
 extension NewListVC: NewListScreenProtocol {
+    func tappedDeleteList() {
+        guard let list = viewModel.getList() else { return }
+        let listName = list.name!
+
+        context.delete(list)
+        
+        do {
+            try context.save()
+        } catch {
+            print("Error: \(error)")
+            return
+        }
+        
+        alert?.showAlertWithAction(title: "Deletado com sucesso", message: "\(listName) foi deletada com sucesso!", action: { action in
+            self.navigationController?.popViewController(animated: true)
+        })
+    }
+    
     func tappedCreateList() {
+        newList = List(context: context)
         newList?.name = newListScreen.nameTextInput.text ?? "Nova lista"
+        newList?.createdAt = Date()
+        
+        for product in viewModel.getProducts() {
+            newList?.addToProducts(product)
+        }
         
         do {
             try context.save()
@@ -80,7 +102,7 @@ extension NewListVC: NewListScreenProtocol {
         product.name = name
         product.quantity = Int16(quantity)!
         
-        newList?.addToProducts(product)
+//        newList?.addToProducts(product)
         viewModel.addProduct(product: product)
     }
 }

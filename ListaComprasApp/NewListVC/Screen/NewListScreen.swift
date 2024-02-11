@@ -10,6 +10,7 @@ import UIKit
 protocol NewListScreenProtocol: AnyObject {
     func tappedAddProduct(name: String, quantity: String)
     func tappedCreateList()
+    func tappedDeleteList()
 }
 
 class NewListScreen: UIView {
@@ -74,6 +75,7 @@ class NewListScreen: UIView {
         tv.standard()
         tv.layer.cornerRadius = 15
         tv.register(ProductsTableViewCell.self, forCellReuseIdentifier: ProductsTableViewCell.identifier)
+        tv.backgroundColor = .white
         return tv
     }()
 
@@ -87,6 +89,15 @@ class NewListScreen: UIView {
         button.layer.borderWidth = 1
         button.backgroundColor = .white
         button.addTarget(self, action: #selector(tappedCreateList), for: .touchUpInside)
+        return button
+    }()
+    
+    lazy var deleteButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setBackgroundImage(UIImage(systemName: "trash")?.withRenderingMode(.alwaysTemplate), for: .normal)
+        button.tintColor = .white
+        button.addTarget(self, action: #selector(tappedDeleteList), for: .touchUpInside)
         return button
     }()
     
@@ -118,6 +129,7 @@ class NewListScreen: UIView {
         inputsView.addSubview(addProductButton)
         addSubview(productsTableView)
         addSubview(createListButton)
+        addSubview(deleteButton)
     }
     
     public func configTableViewDelegateAndDatasource(delegate: UITableViewDelegate, datasource: UITableViewDataSource) {
@@ -147,11 +159,15 @@ class NewListScreen: UIView {
         delegate?.tappedCreateList()
     }
     
+    @objc func tappedDeleteList() {
+        delegate?.tappedDeleteList()
+    }
+    
     private func setupConstraints() {
         NSLayoutConstraint.activate([
             nameTextInput.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16),
-            nameTextInput.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            nameTextInput.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            nameTextInput.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 48),
+            nameTextInput.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -48),
             nameTextInput.heightAnchor.constraint(equalToConstant: 40),
             
             inputsView.topAnchor.constraint(equalTo: nameTextInput.bottomAnchor, constant: 48),
@@ -184,7 +200,12 @@ class NewListScreen: UIView {
             createListButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 24),
             createListButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -24),
             createListButton.heightAnchor.constraint(equalToConstant: 45),
-            createListButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -16)
+            createListButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -16),
+            
+            deleteButton.centerYAnchor.constraint(equalTo: nameTextInput.centerYAnchor),
+            deleteButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            deleteButton.heightAnchor.constraint(equalToConstant: 24),
+            deleteButton.widthAnchor.constraint(equalToConstant: 24),
         ])
     }
 
