@@ -4,13 +4,24 @@
 //
 //  Created by admin on 24/12/23.
 //
+protocol NewListVCProtocol: AnyObject {
+    func updateList(list: List, indexPath: IndexPath)
+}
 
 import UIKit
 
 class NewListVC: UIViewController {
+    private var delegate: NewListVCProtocol?
+    
+    func delegate(delegate: NewListVCProtocol) {
+        self.delegate = delegate
+    }
+    
     private var newListScreen: NewListScreen = NewListScreen()
     private var viewModel: NewListViewModel = NewListViewModel()
     private var alert: Alert?
+    private var productIndexPath: IndexPath?
+    
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var newList: List?
@@ -28,12 +39,14 @@ class NewListVC: UIViewController {
         newListScreen.configTableViewDelegateAndDatasource(delegate: self, datasource: self)
         newListScreen.delegate(delegate: self)
         newListScreen.configAlertController(controller: self)
+        newListScreen.configTextFieldDelegate(delegate: self)
     }
     
-    public func setupDataFromListsVC(list: List) {
+    public func setupDataFromListsVC(list: List, indexPath: IndexPath) {
         viewModel.setList(list: list)
         
         newList = list
+        productIndexPath = indexPath
         
         newListScreen.nameTextInput.text = list.name
         newListScreen.deleteButton.isHidden = false
@@ -140,5 +153,18 @@ extension NewListVC: ProductsTableViewCellProtocol {
         viewModel.subtractProductQuantity(indexPath: indexPath)
         newListScreen.productsTableView.reloadData()
 //        let product = viewModel.loadCurrentProducts(indexPath: indexPath)
+    }
+}
+
+extension NewListVC: UITextFieldDelegate {
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        guard let text = textField.text else { return }
+        
+        if newList != nil && !text.isEmpty {
+            newList?.name = text
+            
+            saveContext()
+            delegate?.updateList(list: newList!, indexPath: productIndexPath!)
+        }
     }
 }

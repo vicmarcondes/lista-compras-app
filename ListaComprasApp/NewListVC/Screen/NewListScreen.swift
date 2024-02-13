@@ -154,6 +154,11 @@ class NewListScreen: UIView {
         productsTableView.dataSource = datasource
     }
     
+    public func configTextFieldDelegate(delegate: UITextFieldDelegate) {
+        nameTextInput.delegate = delegate
+        
+    }
+    
     public func configAlertController(controller: UIViewController) {
         alertControler = Alert(controller: controller)
     }
