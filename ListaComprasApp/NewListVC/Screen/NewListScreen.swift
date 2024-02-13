@@ -11,6 +11,7 @@ protocol NewListScreenProtocol: AnyObject {
     func tappedAddProduct(name: String, quantity: String)
     func tappedCreateList()
     func tappedDeleteList()
+    func tappedUpdateList()
 }
 
 class NewListScreen: UIView {
@@ -92,11 +93,26 @@ class NewListScreen: UIView {
         return button
     }()
     
+    lazy var updateListButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Atualizar", for: .normal)
+        button.setTitleColor(.appBlue, for: .normal)
+        button.borderRounded(5)
+        button.layer.borderColor = UIColor.appBlue.cgColor
+        button.layer.borderWidth = 1
+        button.backgroundColor = .white
+        button.isHidden = true
+        button.addTarget(self, action: #selector(tappedUpdateList), for: .touchUpInside)
+        return button
+    }()
+    
     lazy var deleteButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setBackgroundImage(UIImage(systemName: "trash")?.withRenderingMode(.alwaysTemplate), for: .normal)
         button.tintColor = .white
+        button.isHidden = true
         button.addTarget(self, action: #selector(tappedDeleteList), for: .touchUpInside)
         return button
     }()
@@ -129,6 +145,7 @@ class NewListScreen: UIView {
         inputsView.addSubview(addProductButton)
         addSubview(productsTableView)
         addSubview(createListButton)
+        addSubview(updateListButton)
         addSubview(deleteButton)
     }
     
@@ -161,6 +178,10 @@ class NewListScreen: UIView {
     
     @objc func tappedDeleteList() {
         delegate?.tappedDeleteList()
+    }
+    
+    @objc func tappedUpdateList() {
+        delegate?.tappedUpdateList()
     }
     
     private func setupConstraints() {
@@ -201,6 +222,11 @@ class NewListScreen: UIView {
             createListButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -24),
             createListButton.heightAnchor.constraint(equalToConstant: 45),
             createListButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -16),
+            
+            updateListButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 24),
+            updateListButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -24),
+            updateListButton.heightAnchor.constraint(equalToConstant: 45),
+            updateListButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -16),
             
             deleteButton.centerYAnchor.constraint(equalTo: nameTextInput.centerYAnchor),
             deleteButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),

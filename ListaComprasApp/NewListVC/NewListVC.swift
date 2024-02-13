@@ -33,7 +33,12 @@ class NewListVC: UIViewController {
     public func setupDataFromListsVC(list: List) {
         viewModel.setList(list: list)
         
+        newList = list
+        
         newListScreen.nameTextInput.text = list.name
+        newListScreen.deleteButton.isHidden = false
+        newListScreen.createListButton.isHidden = true
+//        newListScreen.updateListButton.isHidden = false
         
         if let products = list.products as? Set<Product> {
             viewModel.setProducts(products: Array(products))
@@ -58,18 +63,28 @@ extension NewListVC: UITableViewDataSource, UITableViewDelegate {
 }
 
 extension NewListVC: NewListScreenProtocol {
+    func tappedUpdateList() {
+        guard let list = viewModel.getList() else { return }
+        
+        list.name = newListScreen.nameTextInput.text
+        
+//        if let olderProducts = list.products as? Set<Product> {
+//            for (index, product) in olderProducts.enumerated() {
+//                let updatedProduct = viewModel.loadCurrentProducts(index: index)
+//
+//                product.name = updatedProduct.name
+//                product.quantity = updatedProduct.quantity
+//            }
+//        }
+    }
+    
     func tappedDeleteList() {
         guard let list = viewModel.getList() else { return }
         let listName = list.name!
 
         context.delete(list)
         
-        do {
-            try context.save()
-        } catch {
-            print("Error: \(error)")
-            return
-        }
+        saveContext()
         
         alert?.showAlertWithAction(title: "Deletado com sucesso", message: "\(listName) foi deletada com sucesso!", action: { action in
             self.navigationController?.popViewController(animated: true)
@@ -85,12 +100,7 @@ extension NewListVC: NewListScreenProtocol {
             newList?.addToProducts(product)
         }
         
-        do {
-            try context.save()
-        } catch {
-            print("Error: \(error)")
-            return
-        }
+        saveContext()
         
         alert?.showAlertWithAction(title: "Lista criada", message: "Sua lista foi criada com sucesso!", action: { alert in
             self.dismiss(animated: true)
@@ -102,8 +112,21 @@ extension NewListVC: NewListScreenProtocol {
         product.name = name
         product.quantity = Int16(quantity)!
         
-//        newList?.addToProducts(product)
         viewModel.addProduct(product: product)
+        
+        if newList != nil {
+            newList?.addToProducts(product)
+            saveContext()
+        }
+    }
+    
+    private func saveContext() {
+        do {
+            try context.save()
+        } catch {
+            print("Error: \(error)")
+            return
+        }
     }
 }
 

@@ -21,6 +21,10 @@ class NewListViewModel {
         return products[indexPath.row]
     }
     
+    func loadCurrentProducts(index: Int) -> Product {
+        return products[index]
+    }
+    
     public func addProduct(product: Product) {
         products.append(product)
     }
