@@ -36,6 +36,16 @@ class ListsVC: UIViewController {
         navigationController?.navigationBar.largeTitleTextAttributes = textChangeColor
         
         view.backgroundColor = .appBlue
+        
+        //add right button
+        let createListButton = UIBarButtonItem(image: UIImage(systemName: "plus.circle.fill"), style: .plain, target: self, action: #selector(tappedCreateList))
+        navigationItem.rightBarButtonItem = createListButton
+    }
+    
+    @objc private func tappedCreateList() {
+        let vc = NewListVC()
+        vc.delegate(delegate: self)
+        present(vc, animated: true  )
     }
     
     private func getAllLists() {
@@ -73,10 +83,20 @@ extension ListsVC: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension ListsVC: NewListVCProtocol {
-    func updateList(list: List, indexPath: IndexPath) {
-        let listToBeUpdated = lists[indexPath.row]
-        listToBeUpdated.name = list.name
-        listToBeUpdated.products = list.products
+    func deleteList(indexPath: IndexPath) {
+        lists.remove(at: indexPath.row)
+        
+        screen?.tableView.reloadData()
+    }
+    
+    func updateList(list: List, indexPath: IndexPath?) {
+        if indexPath != nil {
+            let listToBeUpdated = lists[indexPath!.row]
+            listToBeUpdated.name = list.name
+            listToBeUpdated.products = list.products
+        } else {
+            lists.append(list)
+        }
         
         screen?.tableView.reloadData()
     }

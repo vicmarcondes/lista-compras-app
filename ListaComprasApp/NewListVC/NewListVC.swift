@@ -5,7 +5,8 @@
 //  Created by admin on 24/12/23.
 //
 protocol NewListVCProtocol: AnyObject {
-    func updateList(list: List, indexPath: IndexPath)
+    func updateList(list: List, indexPath: IndexPath?)
+    func deleteList(indexPath: IndexPath)
 }
 
 import UIKit
@@ -21,6 +22,7 @@ class NewListVC: UIViewController {
     private var viewModel: NewListViewModel = NewListViewModel()
     private var alert: Alert?
     private var productIndexPath: IndexPath?
+    private var isEditingList: Bool = false
     
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -47,6 +49,7 @@ class NewListVC: UIViewController {
         
         newList = list
         productIndexPath = indexPath
+        isEditingList = true
         
         newListScreen.nameTextInput.text = list.name
         newListScreen.deleteButton.isHidden = false
@@ -98,6 +101,7 @@ extension NewListVC: NewListScreenProtocol {
         context.delete(list)
         
         saveContext()
+        delegate?.deleteList(indexPath: productIndexPath!)
         
         alert?.showAlertWithAction(title: "Deletado com sucesso", message: "\(listName) foi deletada com sucesso!", action: { action in
             self.navigationController?.popViewController(animated: true)
@@ -113,8 +117,9 @@ extension NewListVC: NewListScreenProtocol {
             newList?.addToProducts(product)
         }
         
+        delegate?.updateList(list: newList!, indexPath: nil)
         saveContext()
-        
+
         alert?.showAlertWithAction(title: "Lista criada", message: "Sua lista foi criada com sucesso!", action: { alert in
             self.dismiss(animated: true)
         })
@@ -160,7 +165,7 @@ extension NewListVC: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         guard let text = textField.text else { return }
         
-        if newList != nil && !text.isEmpty {
+        if newList != nil && !text.isEmpty && isEditingList {
             newList?.name = text
             
             saveContext()
