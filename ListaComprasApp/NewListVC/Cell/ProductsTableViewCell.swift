@@ -61,11 +61,43 @@ class ProductsTableViewCell: UITableViewCell {
         return button
     }()
     
+    lazy var checkboxProduct: VKCheckbox = {
+        let cb = VKCheckbox()
+        cb.translatesAutoresizingMaskIntoConstraints = false
+        cb.line = .normal
+        cb.color = .appBlue
+        cb.borderWidth = 1.5
+//        cb.borderColor = UIColor.red
+        return cb
+    }()
+    
+    lazy var line: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .black
+        view.isHidden = true
+        return view
+    }()
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         configSubview()
         configConstraints()
         editCellStyle()
+        
+        checkboxProduct.checkboxValueChangedBlock = {
+            isOn in
+            print("Custom checkbox is \(isOn ? "ON" : "OFF")")
+            if isOn {
+                self.line.isHidden = false
+                self.productLabel.textColor = .black.withAlphaComponent(0.5)
+                self.quantityLabel.textColor = .black.withAlphaComponent(0.5)
+            } else {
+                self.line.isHidden = true
+                self.productLabel.textColor = .black
+                self.quantityLabel.textColor = .black
+            }
+        }
     }
     
     required init?(coder: NSCoder) {
@@ -93,8 +125,13 @@ class ProductsTableViewCell: UITableViewCell {
     
     private func configConstraints() {
         NSLayoutConstraint.activate([
+            checkboxProduct.centerYAnchor.constraint(equalTo: centerYAnchor),
+            checkboxProduct.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
+            checkboxProduct.widthAnchor.constraint(equalToConstant: 24),
+            checkboxProduct.heightAnchor.constraint(equalToConstant: 24),
+            
             productLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
-            productLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            productLabel.leadingAnchor.constraint(equalTo: checkboxProduct.trailingAnchor, constant: 8),
             productLabel.trailingAnchor.constraint(equalTo: minusButton.leadingAnchor, constant: -24),
             
             quantityLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
@@ -107,23 +144,31 @@ class ProductsTableViewCell: UITableViewCell {
             
             minusButton.centerYAnchor.constraint(equalTo: centerYAnchor),
             minusButton.widthAnchor.constraint(equalToConstant: 24),
-            minusButton.heightAnchor.constraint(equalToConstant: 24),
+
             minusButton.trailingAnchor.constraint(equalTo: quantityLabel.leadingAnchor, constant: -8),
+            
+            line.heightAnchor.constraint(equalToConstant: 1),
+            line.centerYAnchor.constraint(equalTo: centerYAnchor),
+            line.leadingAnchor.constraint(equalTo: productLabel.leadingAnchor),
+            line.trailingAnchor.constraint(equalTo: quantityLabel.trailingAnchor)
         ])
     }
 
     private func editCellStyle() {
         self.backgroundColor = .white
-        self.isUserInteractionEnabled = false
+//        self.isUserInteractionEnabled = false
     }
 
     private func configSubview() {
+        addSubview(checkboxProduct)
         addSubview(productLabel)
         addSubview(quantityLabel)
         addSubview(plusButton)
         addSubview(minusButton)
-        bringSubviewToFront(plusButton)
-        bringSubviewToFront(minusButton)
+        addSubview(line)
+        contentView.bringSubviewToFront(checkboxProduct)
+//        bringSubviewToFront(plusButton)
+//        bringSubviewToFront(minusButton)
     }
 
 }

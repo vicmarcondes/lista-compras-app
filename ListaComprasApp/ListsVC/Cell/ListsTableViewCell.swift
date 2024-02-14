@@ -77,8 +77,8 @@ class ListsTableViewCell: UITableViewCell {
     
     private func configCell() {
         self.backgroundColor = .appBlue
-        self.layer.borderColor = UIColor.white.cgColor
-        self.layer.borderWidth = 0.2
+//        self.layer.borderColor = UIColor.white.cgColor
+//        self.layer.borderWidth = 0.2
     }
 
 }

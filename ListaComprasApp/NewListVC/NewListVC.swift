@@ -101,7 +101,7 @@ extension NewListVC: NewListScreenProtocol {
         context.delete(list)
         
         saveContext()
-        delegate?.deleteList(indexPath: productIndexPath!)
+        delegate?.deleteList(indexPath: productIndexPath!   )
         
         alert?.showAlertWithAction(title: "Deletado com sucesso", message: "\(listName) foi deletada com sucesso!", action: { action in
             self.navigationController?.popViewController(animated: true)
@@ -136,6 +136,10 @@ extension NewListVC: NewListScreenProtocol {
             newList?.addToProducts(product)
             saveContext()
         }
+        
+        newListScreen.quantityTextInput.text = ""
+        newListScreen.productTextInput.text = ""
+        newListScreen.productTextInput.becomeFirstResponder()
     }
     
     private func saveContext() {
