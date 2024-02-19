@@ -10,6 +10,7 @@ import UIKit
 protocol ProductsTableViewCellProtocol: AnyObject {
     func tappedPlusQuantityButton(indexPath: IndexPath)
     func tappedMinusQuantityButton(indexPath: IndexPath)
+    func tappedCheck(productIndexPath: IndexPath, isChecked: Bool)
 }
 
 class ProductsTableViewCell: UITableViewCell {
@@ -22,6 +23,7 @@ class ProductsTableViewCell: UITableViewCell {
     }
     
     private var indexPath: IndexPath?
+    private var product: Product?
     
     lazy var productLabel: UILabel = {
         let label = UILabel()
@@ -67,6 +69,7 @@ class ProductsTableViewCell: UITableViewCell {
         cb.line = .normal
         cb.color = .appBlue
         cb.borderWidth = 1.5
+        cb.isHidden = true
 //        cb.borderColor = UIColor.red
         return cb
     }()
@@ -85,19 +88,23 @@ class ProductsTableViewCell: UITableViewCell {
         configConstraints()
         editCellStyle()
         
-        checkboxProduct.checkboxValueChangedBlock = {
-            isOn in
-            print("Custom checkbox is \(isOn ? "ON" : "OFF")")
-            if isOn {
-                self.line.isHidden = false
-                self.productLabel.textColor = .black.withAlphaComponent(0.5)
-                self.quantityLabel.textColor = .black.withAlphaComponent(0.5)
-            } else {
-                self.line.isHidden = true
-                self.productLabel.textColor = .black
-                self.quantityLabel.textColor = .black
-            }
-        }
+//        checkboxProduct.checkboxValueChangedBlock = {
+//            isOn in
+//            print("Custom checkbox is \(isOn ? "ON" : "OFF")")
+//            if isOn {
+//                self.line.isHidden = false
+//                self.productLabel.textColor = .black.withAlphaComponent(0.5)
+//                self.quantityLabel.textColor = .black.withAlphaComponent(0.5)
+//
+//                self.delegate?.tappedCheck(productIndexPath: self.indexPath!, isChecked: true)
+//            } else {
+//                self.line.isHidden = true
+//                self.productLabel.textColor = .black
+//                self.quantityLabel.textColor = .black
+//
+//                self.delegate?.tappedCheck(productIndexPath: self.indexPath!, isChecked: false)
+//            }
+//        }
     }
     
     required init?(coder: NSCoder) {
@@ -110,9 +117,12 @@ class ProductsTableViewCell: UITableViewCell {
     
     public func setupCell(product: Product, indexPath: IndexPath) {
         self.indexPath = indexPath
+        self.product = product
         
         productLabel.text = product.name
-        quantityLabel.text =  String(product.quantity)
+        quantityLabel.text = String(product.quantity)
+//        checkboxProduct.setOn(product.checked)
+        
     }
     
     @objc func tappedPlusQuantityButton() {
@@ -157,6 +167,10 @@ class ProductsTableViewCell: UITableViewCell {
     private func editCellStyle() {
         self.backgroundColor = .white
 //        self.isUserInteractionEnabled = false
+//        if let productTest = self.product {
+//            checkboxProduct.setOn(productTest.checked, animated: true)
+//        }
+        
     }
 
     private func configSubview() {

@@ -2,7 +2,7 @@
 //  Product+CoreDataProperties.swift
 //  ListaComprasApp
 //
-//  Created by admin on 07/02/24.
+//  Created by admin on 14/02/24.
 //
 //
 
@@ -18,6 +18,7 @@ extension Product {
 
     @NSManaged public var name: String?
     @NSManaged public var quantity: Int16
+    @NSManaged public var checked: Bool
     @NSManaged public var list: List?
 
 }

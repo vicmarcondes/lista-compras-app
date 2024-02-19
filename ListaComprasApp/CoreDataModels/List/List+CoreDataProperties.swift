@@ -2,7 +2,7 @@
 //  List+CoreDataProperties.swift
 //  ListaComprasApp
 //
-//  Created by admin on 07/02/24.
+//  Created by admin on 14/02/24.
 //
 //
 
@@ -18,6 +18,7 @@ extension List {
 
     @NSManaged public var createdAt: Date?
     @NSManaged public var name: String?
+    @NSManaged public var updatedAt: Date?
     @NSManaged public var products: NSSet?
 
 }

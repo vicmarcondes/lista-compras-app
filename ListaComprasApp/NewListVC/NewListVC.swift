@@ -10,6 +10,7 @@ protocol NewListVCProtocol: AnyObject {
 }
 
 import UIKit
+import CoreData
 
 class NewListVC: UIViewController {
     private var delegate: NewListVCProtocol?
@@ -23,16 +24,18 @@ class NewListVC: UIViewController {
     private var alert: Alert?
     private var productIndexPath: IndexPath?
     private var isEditingList: Bool = false
+    private var isInitialSetup: Bool = true
     
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    var newList: List?
+//    var newList: List?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .appBlue
         
         alert = Alert(controller: self)
+//        viewModel.setList(list: List(context: context))
         // Do any additional setup after loading the view.
     }
     
@@ -47,7 +50,6 @@ class NewListVC: UIViewController {
     public func setupDataFromListsVC(list: List, indexPath: IndexPath) {
         viewModel.setList(list: list)
         
-        newList = list
         productIndexPath = indexPath
         isEditingList = true
         
@@ -55,25 +57,29 @@ class NewListVC: UIViewController {
         newListScreen.deleteButton.isHidden = false
         newListScreen.createListButton.isHidden = true
 //        newListScreen.updateListButton.isHidden = false
+        newListScreen.productsTableView.reloadData()
         
-        if let products = list.products as? Set<Product> {
-            viewModel.setProducts(products: Array(products))
-            newListScreen.productsTableView.reloadData()
-        }
+//        if let products = list.products as? Set<Product> {
+//            viewModel.setProducts(products: Array(products))
+//        }
     }
 
 }
 
 extension NewListVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.getProducts().count
+        return viewModel.getProductsCount()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ProductsTableViewCell.identifier, for: indexPath) as? ProductsTableViewCell
+        let product = viewModel.loadCurrentProducts(indexPath: indexPath)
+        
         cell?.contentView.isUserInteractionEnabled = false
         cell?.delegate(delegate: self)
-        cell?.setupCell(product: viewModel.loadCurrentProducts(indexPath: indexPath), indexPath: indexPath)
+        cell?.setupCell(product: product, indexPath: indexPath)
+        cell?.checkboxProduct.isHidden = !isEditingList
+        
         return cell ?? UITableViewCell()
     }
 }
@@ -101,7 +107,7 @@ extension NewListVC: NewListScreenProtocol {
         context.delete(list)
         
         saveContext()
-        delegate?.deleteList(indexPath: productIndexPath!   )
+        delegate?.deleteList(indexPath: productIndexPath!)
         
         alert?.showAlertWithAction(title: "Deletado com sucesso", message: "\(listName) foi deletada com sucesso!", action: { action in
             self.navigationController?.popViewController(animated: true)
@@ -109,15 +115,17 @@ extension NewListVC: NewListScreenProtocol {
     }
     
     func tappedCreateList() {
-        newList = List(context: context)
-        newList?.name = newListScreen.nameTextInput.text ?? "Nova lista"
-        newList?.createdAt = Date()
+        let newList = viewModel.getList()!
+        newList.name = newListScreen.nameTextInput.text ?? "Nova lista"
+        newList.createdAt = Date()
         
         for product in viewModel.getProducts() {
-            newList?.addToProducts(product)
+            newList.addToProducts(product)
         }
         
-        delegate?.updateList(list: newList!, indexPath: nil)
+        viewModel.setList(list: newList)
+        
+        delegate?.updateList(list: newList, indexPath: nil)
         saveContext()
 
         alert?.showAlertWithAction(title: "Lista criada", message: "Sua lista foi criada com sucesso!", action: { alert in
@@ -131,9 +139,9 @@ extension NewListVC: NewListScreenProtocol {
         product.quantity = Int16(quantity)!
         
         viewModel.addProduct(product: product)
+        newListScreen.productsTableView.reloadData()
         
-        if newList != nil {
-            newList?.addToProducts(product)
+        if isEditingList  {
             saveContext()
         }
         
@@ -144,7 +152,7 @@ extension NewListVC: NewListScreenProtocol {
     
     private func saveContext() {
         do {
-            try context.save()
+             try context.save()
         } catch {
             print("Error: \(error)")
             return
@@ -153,6 +161,39 @@ extension NewListVC: NewListScreenProtocol {
 }
 
 extension NewListVC: ProductsTableViewCellProtocol {
+    func tappedCheck(productIndexPath: IndexPath, isChecked: Bool) {
+        let product = viewModel.loadCurrentProducts(indexPath: productIndexPath)
+        product.checked = isChecked
+            
+        let fetchRequest: NSFetchRequest<Product> = Product.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "name == %@", product.name!)
+        
+        do {
+            let productContext = try context.fetch(fetchRequest)
+            let productFirst = productContext.first
+            productFirst?.checked = isChecked
+            
+            saveContext()
+        } catch {
+            print("Error: \(error)")
+        }
+        
+        let list = viewModel.getList()
+        let products = list?.products
+        if let productsSet = products as? Set<Product> {
+            let productsArray = Array(productsSet)
+            productsArray[productIndexPath.row].checked = isChecked
+            viewModel.setList(list: list!)
+            delegate?.updateList(list: list!, indexPath: self.productIndexPath!)
+        }
+        
+        
+    }
+    
+    func tappedCheckOff(indexPath: IndexPath) {
+        
+    }
+    
     func tappedPlusQuantityButton(indexPath: IndexPath) {
         viewModel.plusProductQuantity(indexPath: indexPath)
         newListScreen.productsTableView.reloadData()
@@ -167,13 +208,14 @@ extension NewListVC: ProductsTableViewCellProtocol {
 
 extension NewListVC: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
+        let list = viewModel.getList()
         guard let text = textField.text else { return }
         
-        if newList != nil && !text.isEmpty && isEditingList {
-            newList?.name = text
+        if list != nil && !text.isEmpty && isEditingList {
+            list?.name = text
             
             saveContext()
-            delegate?.updateList(list: newList!, indexPath: productIndexPath!)
+            delegate?.updateList(list: list!, indexPath: productIndexPath!)
         }
     }
 }
