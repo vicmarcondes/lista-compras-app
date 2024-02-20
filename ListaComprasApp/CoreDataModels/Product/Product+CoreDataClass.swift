@@ -2,7 +2,7 @@
 //  Product+CoreDataClass.swift
 //  ListaComprasApp
 //
-//  Created by admin on 07/02/24.
+//  Created by admin on 19/02/24.
 //
 //
 

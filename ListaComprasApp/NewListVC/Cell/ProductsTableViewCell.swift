@@ -10,10 +10,14 @@ import UIKit
 protocol ProductsTableViewCellProtocol: AnyObject {
     func tappedPlusQuantityButton(indexPath: IndexPath)
     func tappedMinusQuantityButton(indexPath: IndexPath)
+    func tappedProductCheck(product: Product, checked: Bool)
 }
 
 class ProductsTableViewCell: UITableViewCell {
     static let identifier = "ProductsTableViewCell"
+    var product: Product?
+    private var indexPath: IndexPath?
+    public var isEditingList = false
     
     private weak var delegate: ProductsTableViewCellProtocol?
     
@@ -21,7 +25,6 @@ class ProductsTableViewCell: UITableViewCell {
         self.delegate = delegate
     }
     
-    private var indexPath: IndexPath?
     
     lazy var productLabel: UILabel = {
         let label = UILabel()
@@ -84,20 +87,7 @@ class ProductsTableViewCell: UITableViewCell {
         configSubview()
         configConstraints()
         editCellStyle()
-        
-        checkboxProduct.checkboxValueChangedBlock = {
-            isOn in
-            print("Custom checkbox is \(isOn ? "ON" : "OFF")")
-            if isOn {
-                self.line.isHidden = false
-                self.productLabel.textColor = .black.withAlphaComponent(0.5)
-                self.quantityLabel.textColor = .black.withAlphaComponent(0.5)
-            } else {
-                self.line.isHidden = true
-                self.productLabel.textColor = .black
-                self.quantityLabel.textColor = .black
-            }
-        }
+    
     }
     
     required init?(coder: NSCoder) {
@@ -110,9 +100,18 @@ class ProductsTableViewCell: UITableViewCell {
     
     public func setupCell(product: Product, indexPath: IndexPath) {
         self.indexPath = indexPath
+        self.product = product
+        
+        if isEditingList {
+            checkFunction()
+        }
+        
+        print("Setup cell:  \(product.name) - \(product.checked)")
         
         productLabel.text = product.name
         quantityLabel.text =  String(product.quantity)
+        checkboxProduct.setOn(product.checked, animated: true)
+        
     }
     
     @objc func tappedPlusQuantityButton() {
@@ -159,6 +158,24 @@ class ProductsTableViewCell: UITableViewCell {
 //        self.isUserInteractionEnabled = false
     }
 
+    private func checkFunction() {
+        checkboxProduct.checkboxValueChangedBlock = {
+            isOn in
+            print("Custom checkbox is \(isOn ? "ON" : "OFF")")
+            if isOn {
+                self.line.isHidden = false
+                self.productLabel.textColor = .black.withAlphaComponent(0.5)
+                self.quantityLabel.textColor = .black.withAlphaComponent(0.5)
+            } else {
+                self.line.isHidden = true
+                self.productLabel.textColor = .black
+                self.quantityLabel.textColor = .black
+            }
+            
+            self.delegate?.tappedProductCheck(product: self.product!, checked: isOn)
+        }
+    }
+    
     private func configSubview() {
         addSubview(checkboxProduct)
         addSubview(productLabel)

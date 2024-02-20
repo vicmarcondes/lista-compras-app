@@ -60,6 +60,7 @@ class NewListVC: UIViewController {
             viewModel.setProducts(products: Array(products))
             newListScreen.productsTableView.reloadData()
         }
+        
     }
 
 }
@@ -73,6 +74,7 @@ extension NewListVC: UITableViewDataSource, UITableViewDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: ProductsTableViewCell.identifier, for: indexPath) as? ProductsTableViewCell
         cell?.contentView.isUserInteractionEnabled = false
         cell?.delegate(delegate: self)
+        cell?.isEditingList = isEditingList
         cell?.setupCell(product: viewModel.loadCurrentProducts(indexPath: indexPath), indexPath: indexPath)
         return cell ?? UITableViewCell()
     }
@@ -153,6 +155,19 @@ extension NewListVC: NewListScreenProtocol {
 }
 
 extension NewListVC: ProductsTableViewCellProtocol {
+    func tappedProductCheck(product: Product, checked: Bool) {
+        for productItem in newList?.products as! Set<Product> {
+            if product.id == productItem.id {
+                print("Item: \(product.name)")
+                product.checked = checked
+            }
+        }
+        
+        saveContext()
+        
+        delegate?.updateList(list: newList!, indexPath: self.productIndexPath!)
+    }
+    
     func tappedPlusQuantityButton(indexPath: IndexPath) {
         viewModel.plusProductQuantity(indexPath: indexPath)
         newListScreen.productsTableView.reloadData()

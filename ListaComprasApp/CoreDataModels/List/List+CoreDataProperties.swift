@@ -36,7 +36,6 @@ extension List {
 
     @objc(removeProducts:)
     @NSManaged public func removeFromProducts(_ values: NSSet)
-
 }
 
 extension List : Identifiable {
