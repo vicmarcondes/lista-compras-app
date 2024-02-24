@@ -78,6 +78,26 @@ extension NewListVC: UITableViewDataSource, UITableViewDelegate {
         cell?.setupCell(product: viewModel.loadCurrentProducts(indexPath: indexPath), indexPath: indexPath)
         return cell ?? UITableViewCell()
     }
+    
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return .delete
+    }
+
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if (editingStyle == .delete) {
+            if let produtosSet = newList?.products as? NSMutableSet,
+               let produtoParaApagar = produtosSet.allObjects[indexPath.row] as? Product {
+                
+                produtosSet.remove(produtoParaApagar)
+                
+                self.context.delete(produtoParaApagar)
+                saveContext()
+                tableView.deleteRows(at: [indexPath], with: .fade)
+                
+                self.delegate?.updateList(list: newList!, indexPath: productIndexPath)
+            }
+        }
+    }
 }
 
 extension NewListVC: NewListScreenProtocol {
@@ -158,7 +178,6 @@ extension NewListVC: ProductsTableViewCellProtocol {
     func tappedProductCheck(product: Product, checked: Bool) {
         for productItem in newList?.products as! Set<Product> {
             if product.id == productItem.id {
-                print("Item: \(product.name)")
                 product.checked = checked
             }
         }

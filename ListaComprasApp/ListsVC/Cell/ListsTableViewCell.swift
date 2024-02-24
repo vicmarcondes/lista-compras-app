@@ -26,6 +26,15 @@ class ListsTableViewCell: UITableViewCell {
         return label
     }()
     
+    let percentageChecked: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .white.withAlphaComponent(0.8)
+        label.font = UIFont.systemFont(ofSize: 14)
+
+        return label
+    }()
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -41,6 +50,7 @@ class ListsTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         addSubview(nameLabel)
         addSubview(productsLabel)
+        addSubview(percentageChecked)
         configConstraints()
         configCell()
     }
@@ -51,7 +61,7 @@ class ListsTableViewCell: UITableViewCell {
     
     public func setupCell(list: List) {
         nameLabel.text = list.name
-        
+                
         if let products = list.products as? Set<Product> {
             let productsArray = Array(products)
             
@@ -59,6 +69,13 @@ class ListsTableViewCell: UITableViewCell {
                 product.name ?? "Produto"
             }
             
+            let productsChecked = productsArray.filter { product in
+                product.checked
+            }
+            
+            let percentageValue = Int(Double(productsChecked.count) / Double(products.count) * 100)
+            
+            percentageChecked.text = "\(percentageValue != 100 ? String(percentageValue) + "%" : "Complete")"
             productsLabel.text = productsNames.joined(separator: ", ")
         }
     }
@@ -66,12 +83,16 @@ class ListsTableViewCell: UITableViewCell {
     private func configConstraints() {
         NSLayoutConstraint.activate([
             nameLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            nameLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            nameLabel.trailingAnchor.constraint(equalTo: percentageChecked.leadingAnchor, constant: -16),
             nameLabel.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -12),
 
             productsLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             productsLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
             productsLabel.centerYAnchor.constraint(equalTo: centerYAnchor, constant: 12),
+            
+            percentageChecked.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            percentageChecked.centerYAnchor.constraint(equalTo: nameLabel.centerYAnchor),
+
         ])
     }
     

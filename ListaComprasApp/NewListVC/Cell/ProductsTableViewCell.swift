@@ -40,7 +40,7 @@ class ProductsTableViewCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         label.textColor = .black
-        label.text = "4"
+        label.text = "45%"
         return label
     }()
     
@@ -105,8 +105,6 @@ class ProductsTableViewCell: UITableViewCell {
         if isEditingList {
             checkFunction()
         }
-        
-        print("Setup cell:  \(product.name) - \(product.checked)")
         
         productLabel.text = product.name
         quantityLabel.text =  String(product.quantity)

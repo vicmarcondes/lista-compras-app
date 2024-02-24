@@ -14,15 +14,15 @@ class NewListViewModel {
     private var products: [Product] = []
     
     func getProducts() -> [Product] {
-        return products
+        return list?.products?.allObjects as! [Product]
     }
     
     func loadCurrentProducts(indexPath: IndexPath) -> Product {
-        return products[indexPath.row]
+        return list?.products?.allObjects[indexPath.row] as! Product
     }
     
     func loadCurrentProducts(index: Int) -> Product {
-        return products[index]
+        return list?.products?.allObjects[index] as! Product
     }
     
     public func addProduct(product: Product) {
