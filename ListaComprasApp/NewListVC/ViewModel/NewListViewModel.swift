@@ -9,43 +9,43 @@ import Foundation
 import UIKit
 
 class NewListViewModel {
-    private var list: List?
+    private var list: Lists?
     
-    private var products: [Product] = []
+    private var products: [Products] = []
     
-    func getProducts() -> [Product] {
-        return list?.products?.allObjects as! [Product]
+    func getProducts() -> [Products] {
+        return list?.products ?? []
     }
     
-    func loadCurrentProducts(indexPath: IndexPath) -> Product {
-        return list?.products?.allObjects[indexPath.row] as! Product
+    func loadCurrentProducts(indexPath: IndexPath) -> Products {
+        return list?.products[indexPath.row] ?? Products(id: "teste", name: "teste", checked: false, quantity: 4)
     }
     
-    func loadCurrentProducts(index: Int) -> Product {
-        return list?.products?.allObjects[index] as! Product
+    func loadCurrentProducts(index: Int) -> Products {
+        return list?.products[index] ?? Products(id: "teste", name: "teste", checked: false, quantity: 4)
     }
     
-    public func addProduct(product: Product) {
-        products.append(product)
+    func addProduct(product: Products) {
+        list?.products.append(product)
     }
     
     public func plusProductQuantity(indexPath: IndexPath) {
-        products[indexPath.row].quantity += 1
+        list?.products[indexPath.row].quantity += 1
     }
     
     public func subtractProductQuantity(indexPath: IndexPath) {
-        products[indexPath.row].quantity -= 1
+        list?.products[indexPath.row].quantity -= 1
     }
     
-    public func setProducts(products: [Product]) {
+    public func setProducts(products: [Products]) {
         self.products = products
     }
     
-    public func setList(list: List) {
+    public func setList(list: Lists) {
         self.list = list
     }
     
-    public func getList() -> List?    {
+    public func getList() -> Lists?    {
         return list
     }
 }

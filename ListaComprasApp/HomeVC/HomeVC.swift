@@ -9,11 +9,17 @@ import UIKit
 
 class HomeVC: UIViewController {
     
+    private var listsService: ListService = ListService()
     private var homeScreen: HomeScreen?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .appBlue
+        
+        listsService.addProduct(listId: "Nf4oJOFS72SftheZehU2", product: Products(id: "", name: "carangueijo", checked: false, quantity: 2)) { success in
+            print(success)
+        }
+        
         // Do any additional setup after loading the view.
     }
     

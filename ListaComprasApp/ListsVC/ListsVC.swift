@@ -11,12 +11,14 @@ class ListsVC: UIViewController {
 
     private var screen: ListsScreen?
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    private var lists = [List]()
+    var lists = [Lists]()
+    private let listsService: ListService = ListService()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureNavigationBar()
         getAllLists()
+//        listsService.createListMock()
         // Do any additional setup after loading the view.
     }
     
@@ -44,17 +46,23 @@ class ListsVC: UIViewController {
     
     @objc private func tappedCreateList() {
         let vc = NewListVC()
+        vc.newList = Lists(id: "", name: "Nova Lista", createdAt: Date.now, products: [])
         vc.delegate(delegate: self)
         present(vc, animated: true  )
     }
     
     private func getAllLists() {
-        do {
-            lists = try context.fetch(List.fetchRequest())
-            screen?.tableView.reloadData()
-        } catch {
-            print("Error:  \(error)")
-        }
+//        do {
+//            lists = try context.fetch(List.fetchRequest())
+//            screen?.tableView.reloadData()
+//        } catch {
+//            print("Error:  \(error)")
+//        }
+        
+        listsService.getAllLists(completion: { listsData in
+            self.lists = listsData
+            self.screen?.tableView.reloadData()
+        })
     }
 }
 
@@ -72,7 +80,7 @@ extension ListsVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = NewListVC()
         vc.delegate(delegate: self)
-        vc.setupDataFromListsVC(list: lists[indexPath.row], indexPath: indexPath)
+        vc.setupDataFromListsVC(list: lists[indexPath.row], indexPath: indexPath, service: listsService)
         navigationController?.pushViewController(vc, animated: true)
 //        present(vc, animated: true)
     }
@@ -83,6 +91,10 @@ extension ListsVC: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension ListsVC: NewListVCProtocol {
+    func updateList() {
+        getAllLists()
+    }
+    
     func deleteList(indexPath: IndexPath) {
         lists.remove(at: indexPath.row)
         
@@ -90,13 +102,13 @@ extension ListsVC: NewListVCProtocol {
     }
     
     func updateList(list: List, indexPath: IndexPath?) {
-        if indexPath != nil {
-            let listToBeUpdated = lists[indexPath!.row]
-            listToBeUpdated.name = list.name
-            listToBeUpdated.products = list.products
-        } else {
-            lists.append(list)
-        }
+//        if indexPath != nil {
+//            let listToBeUpdated = lists[indexPath!.row]
+//            listToBeUpdated.name = list.name
+//            listToBeUpdated.products = list.products
+//        } else {
+//            lists.append(list)
+//        }
         
         screen?.tableView.reloadData()
     }

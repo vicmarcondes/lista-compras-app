@@ -14,6 +14,9 @@
 		84075B482B75C15B00BAA48F /* ListsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84075B472B75C15B00BAA48F /* ListsTableViewCell.swift */; };
 		8415667D2B65603F002EA446 /* ProductsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8415667C2B65603F002EA446 /* ProductsTableViewCell.swift */; };
 		841566802B66C05D002EA446 /* NewListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8415667F2B66C05D002EA446 /* NewListViewModel.swift */; };
+		841E507D2C010BB800452D0B /* List.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841E507C2C010BB800452D0B /* List.swift */; };
+		841E50802C010CC500452D0B /* ListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841E507F2C010CC500452D0B /* ListService.swift */; };
+		841E50822C01178100452D0B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 841E50812C01178100452D0B /* GoogleService-Info.plist */; };
 		842CAEF22B7300FD00472D9D /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842CAEF12B7300FD00472D9D /* Alert.swift */; };
 		8451BE052B4777BF00089F8E /* NewListScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8451BE042B4777BF00089F8E /* NewListScreen.swift */; };
 		8465BD522B7C0401007EA1B6 /* VKCheckbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8465BD512B7C0401007EA1B6 /* VKCheckbox.swift */; };
@@ -29,9 +32,12 @@
 		849A811F2B3871FA00D4F3B6 /* NewListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849A811E2B3871FA00D4F3B6 /* NewListVC.swift */; };
 		84B6C2AA2B48953C000FC6BC /* UITextField + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B6C2A92B48953C000FC6BC /* UITextField + Extension.swift */; };
 		84FF138D2B744A2F00B6CC27 /* ListaComprasAppCoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 84FF138B2B744A2F00B6CC27 /* ListaComprasAppCoreData.xcdatamodeld */; };
+		9085760D432CA00D99ABCA36 /* Pods_ListaComprasApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FB0901FB4FA5055CCB82A49 /* Pods_ListaComprasApp.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		07EF820CD97484F3973C2100 /* Pods-ListaComprasApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ListaComprasApp.debug.xcconfig"; path = "Target Support Files/Pods-ListaComprasApp/Pods-ListaComprasApp.debug.xcconfig"; sourceTree = "<group>"; };
+		3FB0901FB4FA5055CCB82A49 /* Pods_ListaComprasApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ListaComprasApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		84075B382B74528400BAA48F /* List+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "List+CoreDataClass.swift"; sourceTree = "<group>"; };
 		84075B392B74528400BAA48F /* List+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "List+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		84075B422B75120000BAA48F /* ListsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsVC.swift; sourceTree = "<group>"; };
@@ -39,6 +45,9 @@
 		84075B472B75C15B00BAA48F /* ListsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsTableViewCell.swift; sourceTree = "<group>"; };
 		8415667C2B65603F002EA446 /* ProductsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsTableViewCell.swift; sourceTree = "<group>"; };
 		8415667F2B66C05D002EA446 /* NewListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewListViewModel.swift; sourceTree = "<group>"; };
+		841E507C2C010BB800452D0B /* List.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = List.swift; sourceTree = "<group>"; };
+		841E507F2C010CC500452D0B /* ListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListService.swift; sourceTree = "<group>"; };
+		841E50812C01178100452D0B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		842CAEF12B7300FD00472D9D /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		8451BE042B4777BF00089F8E /* NewListScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewListScreen.swift; sourceTree = "<group>"; };
 		8465BD512B7C0401007EA1B6 /* VKCheckbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKCheckbox.swift; sourceTree = "<group>"; };
@@ -58,6 +67,7 @@
 		849A811E2B3871FA00D4F3B6 /* NewListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewListVC.swift; sourceTree = "<group>"; };
 		84B6C2A92B48953C000FC6BC /* UITextField + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField + Extension.swift"; sourceTree = "<group>"; };
 		84FF138C2B744A2F00B6CC27 /* ListaComprasAppCoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ListaComprasAppCoreData.xcdatamodel; sourceTree = "<group>"; };
+		A7ABBD2448AC0A7FE73F7EB6 /* Pods-ListaComprasApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ListaComprasApp.release.xcconfig"; path = "Target Support Files/Pods-ListaComprasApp/Pods-ListaComprasApp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +75,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9085760D432CA00D99ABCA36 /* Pods_ListaComprasApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -129,6 +140,22 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		841E507B2C010BA800452D0B /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				841E507C2C010BB800452D0B /* List.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		841E507E2C010CB900452D0B /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				841E507F2C010CC500452D0B /* ListService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		842CAEF02B7300F300472D9D /* Alert */ = {
 			isa = PBXGroup;
 			children = (
@@ -150,6 +177,8 @@
 			children = (
 				849A80F92B339BAB00D4F3B6 /* ListaComprasApp */,
 				849A80F82B339BAB00D4F3B6 /* Products */,
+				93E0DFCA4D85509914C0A528 /* Pods */,
+				895DF5C49AB094C4D2E57C0A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -164,6 +193,8 @@
 		849A80F92B339BAB00D4F3B6 /* ListaComprasApp */ = {
 			isa = PBXGroup;
 			children = (
+				841E507E2C010CB900452D0B /* Services */,
+				841E507B2C010BA800452D0B /* Models */,
 				8465BD502B7C03DD007EA1B6 /* Checkbox */,
 				842CAEF02B7300F300472D9D /* Alert */,
 				849A81122B34ECF100D4F3B6 /* Extensions */,
@@ -177,6 +208,7 @@
 				849A81052B339BAC00D4F3B6 /* LaunchScreen.storyboard */,
 				849A81082B339BAC00D4F3B6 /* Info.plist */,
 				84FF138B2B744A2F00B6CC27 /* ListaComprasAppCoreData.xcdatamodeld */,
+				841E50812C01178100452D0B /* GoogleService-Info.plist */,
 			);
 			path = ListaComprasApp;
 			sourceTree = "<group>";
@@ -239,6 +271,23 @@
 			path = CoreDataModels;
 			sourceTree = "<group>";
 		};
+		895DF5C49AB094C4D2E57C0A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3FB0901FB4FA5055CCB82A49 /* Pods_ListaComprasApp.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		93E0DFCA4D85509914C0A528 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				07EF820CD97484F3973C2100 /* Pods-ListaComprasApp.debug.xcconfig */,
+				A7ABBD2448AC0A7FE73F7EB6 /* Pods-ListaComprasApp.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -246,9 +295,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 849A810B2B339BAC00D4F3B6 /* Build configuration list for PBXNativeTarget "ListaComprasApp" */;
 			buildPhases = (
+				8E38E1B8C393F3C582F62F61 /* [CP] Check Pods Manifest.lock */,
 				849A80F32B339BAB00D4F3B6 /* Sources */,
 				849A80F42B339BAB00D4F3B6 /* Frameworks */,
 				849A80F52B339BAB00D4F3B6 /* Resources */,
+				CF63AEFB52220C6C3857D958 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -297,10 +348,53 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				841E50822C01178100452D0B /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		8E38E1B8C393F3C582F62F61 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ListaComprasApp-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CF63AEFB52220C6C3857D958 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ListaComprasApp/Pods-ListaComprasApp-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ListaComprasApp/Pods-ListaComprasApp-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ListaComprasApp/Pods-ListaComprasApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		849A80F32B339BAB00D4F3B6 /* Sources */ = {
@@ -316,9 +410,11 @@
 				849A81162B3612C900D4F3B6 /* HomeScreen.swift in Sources */,
 				842CAEF22B7300FD00472D9D /* Alert.swift in Sources */,
 				84FF138D2B744A2F00B6CC27 /* ListaComprasAppCoreData.xcdatamodeld in Sources */,
+				841E50802C010CC500452D0B /* ListService.swift in Sources */,
 				84075B3A2B74528400BAA48F /* List+CoreDataClass.swift in Sources */,
 				841566802B66C05D002EA446 /* NewListViewModel.swift in Sources */,
 				849A81182B372A8600D4F3B6 /* UIView + Extension.swift in Sources */,
+				841E507D2C010BB800452D0B /* List.swift in Sources */,
 				84075B452B75149700BAA48F /* ListsScreen.swift in Sources */,
 				849A80FB2B339BAB00D4F3B6 /* AppDelegate.swift in Sources */,
 				84733BC02B840427002372BA /* Product+CoreDataProperties.swift in Sources */,
@@ -382,7 +478,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -443,7 +539,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -464,6 +560,7 @@
 		};
 		849A810C2B339BAC00D4F3B6 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 07EF820CD97484F3973C2100 /* Pods-ListaComprasApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -494,6 +591,7 @@
 		};
 		849A810D2B339BAC00D4F3B6 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A7ABBD2448AC0A7FE73F7EB6 /* Pods-ListaComprasApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

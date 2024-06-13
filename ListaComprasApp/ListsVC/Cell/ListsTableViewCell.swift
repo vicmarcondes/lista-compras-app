@@ -59,25 +59,29 @@ class ListsTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    public func setupCell(list: List) {
+    public func setupCell(list: Lists) {
         nameLabel.text = list.name
                 
-        if let products = list.products as? Set<Product> {
-            let productsArray = Array(products)
+//        if let products = list.products as? Set<Product> {
+        let productsArray = list.products
             
             let productsNames = productsArray.map { product in
-                product.name ?? "Produto"
+                product.name
             }
             
             let productsChecked = productsArray.filter { product in
                 product.checked
             }
             
-            let percentageValue = Int(Double(productsChecked.count) / Double(products.count) * 100)
+            var percentageValue = 0
+            
+            if productsArray.count != 0 {
+                percentageValue = Int(Double(productsChecked.count) / Double(productsArray.count) * 100)
+            }
             
             percentageChecked.text = "\(percentageValue != 100 ? String(percentageValue) + "%" : "Complete")"
             productsLabel.text = productsNames.joined(separator: ", ")
-        }
+//        }
     }
     
     private func configConstraints() {

@@ -1,0 +1,6 @@
+framework module Pods_ListaComprasApp {
+  umbrella header "Pods-ListaComprasApp-umbrella.h"
+
+  export *
+  module * { export * }
+}

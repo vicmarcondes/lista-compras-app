@@ -10,12 +10,12 @@ import UIKit
 protocol ProductsTableViewCellProtocol: AnyObject {
     func tappedPlusQuantityButton(indexPath: IndexPath)
     func tappedMinusQuantityButton(indexPath: IndexPath)
-    func tappedProductCheck(product: Product, checked: Bool)
+    func tappedProductCheck(product: Products, checked: Bool)
 }
 
 class ProductsTableViewCell: UITableViewCell {
     static let identifier = "ProductsTableViewCell"
-    var product: Product?
+    var product: Products?
     private var indexPath: IndexPath?
     public var isEditingList = false
     
@@ -98,7 +98,7 @@ class ProductsTableViewCell: UITableViewCell {
         super.awakeFromNib()
     }
     
-    public func setupCell(product: Product, indexPath: IndexPath) {
+    public func setupCell(product: Products, indexPath: IndexPath) {
         self.indexPath = indexPath
         self.product = product
         
